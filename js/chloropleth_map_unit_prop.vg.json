@@ -1,0 +1,161 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "2021 Median Melbourne Price Map by Suburb",
+  "width": 350,
+  "height": 275,
+  "params": [
+    {
+      "name": "zoom_level",
+      "value": 15000,
+      "bind": {
+      "input": "range",
+      "min": 15000,
+      "max": 25000,
+      "step": 100,
+      "name": "Zoom: "
+      }},
+    
+    
+    {"name":"property_type",
+    
+  
+    "bind":
+    
+    { "input":"select",
+    
+    "options":[null,"unit"],"labels":["house","unit"], "name":"Property Type Selection:"}
+
+   
+  }
+  ],
+  "layer" : [ {
+    
+    
+    
+    
+ 
+    "data": {
+      "url": "https://raw.githubusercontent.com/GuyDavis1/Week-9-Homework/main/data/output_smol.topojson",
+      "format": {
+            "type": "topojson",
+            "feature": "vic_localities"
+          }
+    }, 
+    "projection": {
+      "type": "conicEqualArea",
+      "parallels":[144,-38],
+      "center": [145,-38],
+      "scale":{"expr":"zoom_level"}
+
+      
+   
+    },
+    "mark": {"type": "geoshape","fill": "#EEEEEE","stroke": "#EEEEEE"}
+
+
+  },
+    {"data": {
+    "url": "https://raw.githubusercontent.com/GuyDavis1/Week-9-Homework/main/data/output_smol.topojson",
+    "format": {
+          "type": "topojson",
+          "feature": "vic_localities"
+        }
+  },
+  "transform": [
+    {
+      "lookup": "properties.LOC_NAME",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/GuyDavis1/Week-9-Homework/main/data/house_prices.csv"
+        },
+        "key": "suburb",
+        "fields": ["p_type","median_price"]
+      }
+    },
+    {"calculate": "datum.median_price", "as": "median price"},
+    {"calculate": "datum.p_type", "as": "prop_type"},
+    {"filter":"datum.p_type=='house'&& property_type==null"}
+  ],
+  "projection": {
+    "type": "conicEqualArea",
+
+    "parallels":[144,-38],
+    "center": [145,-38],
+    
+      "scale":{"expr":"zoom_level"}
+
+  },
+
+  "mark": {
+    "type": "geoshape"},
+  
+    
+  "encoding": {
+    "color": {
+      "field": "median price",
+      
+      "type": "quantitative",
+      "scale":{"domain":[200000,2000000],
+      "range":["#0d0887","#9c179e","#ed7953","#f0f921","#f0f921"]
+      }
+    },
+    "tooltip": [
+      {"field": "properties.LOC_NAME", "type": "nominal", "title": "suburb"},
+      {"field": "median_price", "type": "quantitative"},
+      {"field": "prop_type", "type": "nominal"}
+    ]
+  }
+},
+{"data": {
+  "url": "https://raw.githubusercontent.com/GuyDavis1/Week-9-Homework/main/data/output_smol.topojson",
+  "format": {
+        "type": "topojson",
+        "feature": "vic_localities"
+      }
+},
+"transform": [
+  {
+    "lookup": "properties.LOC_NAME",
+    "from": {
+      "data": {
+        "url": "https://raw.githubusercontent.com/GuyDavis1/Week-9-Homework/main/data/unit_prices.csv"
+      },
+      "key": "suburb",
+      "fields": ["p_type","median_price"]
+    }
+  },
+  {"calculate": "datum.median_price", "as": "median price"},
+  {"calculate": "datum.p_type", "as": "prop_type"},
+  {"filter":"datum.p_type=='unit'&& property_type=='unit'"}
+],
+"projection": {
+  "type": "conicEqualArea",
+
+  "parallels":[144,-38],
+  "center": [145,-38],
+  
+    "scale":{"expr":"zoom_level"}
+},
+
+"mark": {
+  "type": "geoshape"},
+
+  
+"encoding": {
+  "color": {
+    "field": "median price",
+    
+    "type": "quantitative",
+    "scale":{"domain":[200000,2000000],
+    "range":["#0d0887","#9c179e","#ed7953","#f0f921"]
+    }
+  },
+  "tooltip": [
+    {"field": "properties.LOC_NAME", "type": "nominal", "title": "suburb"},
+    {"field": "median_price", "type": "quantitative"},
+    {"field": "prop_type", "type": "nominal"}
+  ]
+}
+}
+  ]
+}
