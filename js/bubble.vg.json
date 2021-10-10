@@ -27,11 +27,12 @@
     "encoding": {
       "x": {
         "field": "price",
+        "title":"median prices",
         "type": "quantitative",
         "axis": {"grid": false},
         "scale": {"domainMax":3000000,"domainMin":200000,"type": "log","base":10}
       },
-      "y": {"field": "rent", "type": "quantitative",
+      "y": {"field": "median rents", "type": "quantitative",
       
         "title":"rental yield"},
       "size": {
