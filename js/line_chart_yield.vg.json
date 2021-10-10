@@ -177,7 +177,7 @@
               {"field":"LGA","type":"nominal","title":"area"},
               {"field":"prop_type","type":"nominal","title":"property type"},
               {"field":"median_rent","type":"quantitative","title":"median rent"},
-              {"field":"% rental yield","type":"quantitative","title":"rental yield","format": ".1f"},
+              
               {"field":"year","type":"temporal","title":"year","timeUnit":"year"}
             ]
       
@@ -211,7 +211,7 @@
             {"field":"LGA","type":"nominal","title":"area"},
             {"field":"prop_type","type":"nominal","title":"property type"},
             {"field":"median_rent","type":"quantitative","title":"median rent"},
-            {"field":"% rental yield","type":"quantitative","title":"rental yield","format": ".1f"},
+           
             {"field":"year","type":"temporal","title":"year","timeUnit":"year"}
     
           ]
