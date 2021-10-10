@@ -39,10 +39,10 @@
       "axis": {"labelExpr": "datum.label + '%'"}},
 
       "color": {"field": "area", "type": "nominal","scale":{
-          "domain":["Inner Melbourne Units","Metropolitan Melbourne Units","Outer Metropolitan Units",
-            "Inner Melbourne Houses","Metropolitan Melbourne Houses","Outer Metropolitan Houses","House","Unit"],
-        "range":["black","black","black","red","green","red","grey","blue"]},"legend":null
-      },
+        "domain":["Inner Melbourne Units","Metropolitan Melbourne Units","Outer Metropolitan Units",
+          "Inner Melbourne Houses","Metropolitan Melbourne Houses","Outer Metropolitan Houses","House","Unit"],
+      "range":["#E2711D","#E61919","#B91793","#21E783","#17A69F","#1566C4","#17A69F","#E61919"]},"legend":null
+    },
       "tooltip":[
         {"field":"LGA","type":"nominal","title":"area"},
         {"field":"prop_type","type":"nominal","title":"property type"},
@@ -105,7 +105,11 @@
                 },
             "encoding": {
                  "text": {"field": "area", "type": "nominal"},
-                 "color": {"value": "black"},
+                 "color":  {"field": "area", "type": "nominal","scale":{
+                  "domain":["Inner Melbourne Units","Metropolitan Melbourne Units","Outer Metropolitan Units",
+                    "Inner Melbourne Houses","Metropolitan Melbourne Houses","Outer Metropolitan Houses","House","Unit"],
+                "range":["#E2711D","#E61919","#B91793","#21E783","#17A69F","#1566C4","#17A69F","#E61919"]},"legend":null
+              },
                  "opacity": {
                     "condition": {
                     "test": {"field": "year", "equal": 2019,"timeUnit":"year"},
