@@ -27,21 +27,21 @@
     "encoding": {
       "x": {
         "field": "price",
-        "title":"median prices",
+        "title":"median price",
         "type": "quantitative",
         "axis": {"grid": false},
         "scale": {"domainMax":3000000,"domainMin":200000,"type": "log","base":10}
       },
-      "y": {"field": "median rents", "type": "quantitative",
+      "y": {"field": "rent", "type": "quantitative","scale":{"type":"log"},
       
-        "title":"rental yield"},
+        "title":"median rent"},
       "size": {
         "field": "Count",
         "type": "quantitative",
         "title": "Count of investment properties",
         "legend": null
       },
-      "color": {"field": "prop_type", "type": "nominal","title":"Property Type"},
+      "color": {"field": "prop_type", "type": "nominal","title":"Property Type","scale":{"domain":["House","Unit"],"range":["#17A69F","#E61919"]}},
       "tooltip":[
           {"field":"suburb","type":"nominal","title":"Suburb"},
           {"field":"ry","type":"quantitative","title":"% rental yield","format": ".1f"},
