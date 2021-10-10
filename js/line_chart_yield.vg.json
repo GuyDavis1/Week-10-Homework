@@ -38,7 +38,7 @@
 
       "color": {"field": "area", "type": "nominal","scale":{
           "domain":["Inner Melbourne Units","Metropolitan Melbourne Units","Outer Metropolitan Units",
-            "Inner Melbourne Houses","Metropolitan Melbourne Houses","Outer Metropolitan Houses","House","Unit"],
+            "Inner Melbourne Houses","Metropolitan Melbourne Houses","Outer Metropolitan Houses","H","U"],
         "range":["#E2711D","#E61919","#B91793","#1DA15E","#17A69F","#1566C4","#17A69F","#E61919"]},"legend":null
       }
 
@@ -63,10 +63,11 @@
           "y": {"field": "median_rent", "type": "quantitative"},
           
     
-          "color": {"field": "prop_type", "type": "nominal","title":"area"}
-        
-           
-            
+          "color": {"field": "ptype", "type": "nominal","scale":{
+            "domain":["Inner Melbourne Units","Metropolitan Melbourne Units","Outer Metropolitan Units",
+              "Inner Melbourne Houses","Metropolitan Melbourne Houses","Outer Metropolitan Houses","H","U"],
+          "range":["#E2711D","#E61919","#B91793","#20CE76","#17A69F","#1566C4","#17A69F","#E61919"]},"legend":null
+        }
 
         }
         },
@@ -94,7 +95,7 @@
                  "text": {"field": "area", "type": "nominal"},
                  "color": {"field": "area", "type": "nominal","scale":{
                   "domain":["Inner Melbourne Units","Metropolitan Melbourne Units","Outer Metropolitan Units",
-                    "Inner Melbourne Houses","Metropolitan Melbourne Houses","Outer Metropolitan Houses","House","Unit"],
+                    "Inner Melbourne Houses","Metropolitan Melbourne Houses","Outer Metropolitan Houses","H","U"],
                 "range":["#E2711D","#E61919","#B91793","#20CE76","#17A69F","#1566C4","#17A69F","#E61919"]},"legend":null
               },
                  "opacity": {
@@ -114,25 +115,26 @@
             "transform":[
                 {"filter":"datum.LGA!='Inner Melbourne'&&datum.LGA!='Metropolitan Melbourne'&&datum.LGA!='Outer Metropolitan'"},
                 {"filter":"property_type==null||datum.ptype==property_type"},
-                {"calculate":"100 * datum.idx-100","as":"price growth since 2009"},
-                {"calculate":"100 * datum.yield","as":"rental yield"},
+               
+                {"calculate":" datum.median_rent-1","as":"pg_altered"},
+                
                 {"filter":"Area==datum.LGA"}
             ],
             "mark": {
                 "type": "text",
                 "align": "left",
                 "baseline": "middle",
-                "dx": 5,
+                "dx": 0,
                 "dy":0,
                 "fontSize": 11.5,
                 "fontStyle": "italic"
                 },
             "encoding": {
                  "text": {"field": "area", "type": "nominal"},
-                 "color": {"field": "area", "type": "nominal","scale":{
+                 "color": {"field": "ptype", "type": "nominal","scale":{
                   "domain":["Inner Melbourne Units","Metropolitan Melbourne Units","Outer Metropolitan Units",
-                    "Inner Melbourne Houses","Metropolitan Melbourne Houses","Outer Metropolitan Houses","House","Unit"],
-                "range":["#E2711D","#E61919","#B91793","#1DA15E","#17A69F","#1566C4","#17A69F","#E61919"]},"legend":null
+                    "Inner Melbourne Houses","Metropolitan Melbourne Houses","Outer Metropolitan Houses","H","U"],
+                "range":["#E2711D","#E61919","#B91793","#20CE76","#17A69F","#1566C4","#17A69F","#E61919"]},"legend":null
               },
                  "opacity": {
                     "condition": {
@@ -142,8 +144,7 @@
                     "value": 0
                     },
                  "x": {"field": "year", "type": "temporal"},
-                 "y": {"field": "median_rent", "type": "quantitative"
-                 }
+                 "y": {"field": "pg_altered", "type": "quantitative" }
             }
 
         },
@@ -200,7 +201,11 @@
               "y": {"field": "median_rent", "type": "quantitative"},
               "size":{"value":5},
         
-              "color": {"field": "prop_type", "type": "nominal","title":"area"},
+              "color": {"field": "ptype", "type": "nominal","scale":{
+                "domain":["Inner Melbourne Units","Metropolitan Melbourne Units","Outer Metropolitan Units",
+                  "Inner Melbourne Houses","Metropolitan Melbourne Houses","Outer Metropolitan Houses","H","U"],
+              "range":["#E2711D","#E61919","#B91793","#20CE76","#17A69F","#1566C4","#17A69F","#E61919"]},"legend":null
+            },
                 
           "tooltip":[
             {"field":"LGA","type":"nominal","title":"area"},
